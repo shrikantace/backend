@@ -8,18 +8,26 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('Your API Title')
-  .setDescription('Your API Description')
+  .setTitle(process.env.APP_NAME)
+  .setDescription(process.env.APP_DESC)
   .setVersion('1.0')
-  .addTag('auth')
-  .addTag('user')
+  .addSecurity('bearer', {
+      type: 'http',
+      scheme: 'bearer',
+  })
   .addBearerAuth()
   .build();
+const swaggerOptions = {
+  swaggerOptions: {
+      tagsSorter: 'alpha',
+      docExpansion: 'none'
+  }, 
+};
 
 const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+SwaggerModule.setup('docs', app, document, swaggerOptions);
 
 
-  await app.listen(3000);
+  await app.listen(process.env.APP_PORT);
 }
 bootstrap();

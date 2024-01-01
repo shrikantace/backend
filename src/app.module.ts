@@ -18,5 +18,6 @@ import dbconfig from './config/ormconfig';
     sortSchema:true,
 }), UsersModule, AuthModule,
   ],
+  
 })
 export class AppModule {}
