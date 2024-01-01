@@ -9,8 +9,6 @@ const dbconfig: MysqlConnectionOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
-    synchronize: true,  
-
+    synchronize: true,
 }
-
 export default dbconfig;

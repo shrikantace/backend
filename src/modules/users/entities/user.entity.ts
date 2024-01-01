@@ -1,21 +1,21 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity()
-@ObjectType()
+@Entity() // used for database 
+@ObjectType() // for graphql
 export class User {
-  @PrimaryGeneratedColumn()
-  @Field()
-  id: number;
+    @PrimaryGeneratedColumn()
+    @Field()
+    id: number;
 
-  @Column()
-  @Field()
-  username: string;
+    @Column()
+    @Field()
+    username: string;
 
-  @Column()
-  @Field()
-  password: string;
+    @Column()
+    @Field()
+    password: string;
 
-  @Column({ unique: true })
-  email?: string;
+    @Column({ unique: true })
+    email?: string;
 }

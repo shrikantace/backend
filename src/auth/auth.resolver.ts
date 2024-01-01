@@ -9,17 +9,16 @@ import { CreateUserInput } from 'src/modules/users/dto/create-user.input';
 
 @Resolver('Auth')
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService) { }
 
-  @Mutation(() => LoginResponse)
-  @UseGuards(GqlAuthGuard)
-  async login(@Args('loginuserinput') loginUserInput: LoginUserInput,@Context() context ) {
-    return this.authService.login(context.user);
-  }
+    @Mutation(() => LoginResponse)
+    @UseGuards(GqlAuthGuard) // Authentication guard
+    async login(@Args('loginuserinput') loginUserInput: LoginUserInput, @Context() context) {
+        return this.authService.login(context.user);
+    }
 
-  @Mutation(() => User)
-  
-  async signup(@Args('loginuserinput') createUserInput: CreateUserInput,@Context() context ) {
-    return this.authService.signup(createUserInput);
-  }
+    @Mutation(() => User)
+    async signup(@Args('loginuserinput') createUserInput: CreateUserInput, @Context() context) {
+        return this.authService.signup(createUserInput);
+    }
 }

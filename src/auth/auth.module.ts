@@ -13,9 +13,9 @@ require('dotenv').config()
         JwtModule.register({
             signOptions: { expiresIn: '1d' },
             secret: process.env.JWT_SECRET,
-        }),
+        }), // JWT configuration
     ],
     controllers: [AuthController],
-    providers: [AuthService, AuthResolver, LocalStrategy,JwtStrategy]
+    providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy]
 })
 export class AuthModule { }

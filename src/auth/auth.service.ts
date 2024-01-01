@@ -6,18 +6,14 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserInput } from 'src/modules/users/dto/create-user.input';
 import { UsersService } from 'src/modules/users/users.service';
 
-
 @Injectable()
 export class AuthService {
-
     constructor(private usersService: UsersService,
-        private jwtService: JwtService
-    ) { }
+        private jwtService: JwtService) { }
 
     async validateUser(username: string, password: string): Promise<any> {
         const user = await this.usersService.findOne(username);
-        const valid = await bcrypt.compare(password, user?.password);
-
+        const valid = await bcrypt.compare(password, user?.password); // compare password using bcrypt
         if (user && valid) {
             const { password, ...result } = user;
             return result;
@@ -26,10 +22,9 @@ export class AuthService {
     }
 
     async login(user: User) {
-
         const { password, ...result } = user;
         return {
-            access_token: this.jwtService.sign({ username: user.username, sub: user.id }),
+            access_token: this.jwtService.sign({ username: user.username, sub: user.id }), // generate and return jwt token
             user: result
         };
     }
@@ -40,7 +35,6 @@ export class AuthService {
             throw new Error('User already exists')
         }
         const password = await bcrypt.hash(createUserInput.password, 10);
-
         return this.usersService.create({ ...createUserInput, password });
 
     }
