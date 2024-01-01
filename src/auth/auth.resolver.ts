@@ -6,6 +6,7 @@ import { LoginResponse } from './dto/login-response';
 import { LoginUserInput } from './dto/login-input';
 import { GqlAuthGuard } from '../common/gql-auth.guard';
 import { User } from 'src/modules/users/entities/user.entity';
+import { CreateUserInput } from 'src/modules/users/dto/create-user.input';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -19,7 +20,7 @@ export class AuthResolver {
 
   @Mutation(() => User)
   
-  async signup(@Args('loginuserinput') loginUserInput: LoginUserInput,@Context() context ) {
-    return this.authService.signup(loginUserInput);
+  async signup(@Args('loginuserinput') createUserInput: CreateUserInput,@Context() context ) {
+    return this.authService.signup(createUserInput);
   }
 }

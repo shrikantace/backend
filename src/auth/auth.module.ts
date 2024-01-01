@@ -6,12 +6,12 @@ import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/modules/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
-
+require('dotenv').config()
 @Module({
     imports: [PassportModule, UsersModule,
         JwtModule.register({
-            signOptions: { expiresIn: '60s' },
-            secret: 'hide-me',
+            signOptions: { expiresIn: '1d' },
+            secret: process.env.JWT_SECRET,
         }),
     ],
     providers: [AuthService, AuthResolver, LocalStrategy,JwtStrategy]
